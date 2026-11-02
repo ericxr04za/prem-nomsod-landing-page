@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เปรม นมสด | Prem Fresh Milk</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS Reset & Base ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* สีหลัก: Modern Milk Blue & Warm Amber */
+            --primary: #2B6CB0;
+            --primary-light: #4299E1;
+            --primary-dark: #1E3A8A;
+            --accent: #F59E0B;
+            --accent-light: #FDE68A;
+            --accent-hover: #D97706;
+            --warm: #EA580C;
+            --warm-soft: #FFF7ED;
+            
+            /* สีพื้นหลังสไตล์คาเฟ่ละมุนตา */
+            --cream: #FAF7F2;
+            --cream-card: #FFFFFF;
+            --cream-dark: #F3ECE1;
+            
+            /* โทนสียามค่ำคืน (Night Cafe Theme) */
+            --night-bg: #0F172A;
+            --night-surface: #1E293B;
+            --night-border: rgba(255, 255, 255, 0.08);
+
+            /* ข้อความ */
+            --text-heading: #1E293B;
+            --text-body: #475569;
+            --text-light: #64748B;
+            --white: #FFFFFF;
+
+            /* เงา & มิติระดับพรีเมียม */
+            --shadow-sm: 0 2px 8px rgba(30, 41, 59, 0.05);
+            --shadow: 0 10px 25px -5px rgba(30, 41, 59, 0.08), 0 8px 10px -6px rgba(30, 41, 59, 0.04);
+            --shadow-lg: 0 20px 35px -10px rgba(30, 41, 59, 0.12), 0 10px 15px -5px rgba(30, 41, 59, 0.05);
+            --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.35);
+
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Prompt', 'Kanit', sans-serif;
+            color: var(--text-body);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: #93C5FD; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+        /* ===== Navigation ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav-logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover img {
+            transform: rotate(6deg) scale(1.05);
+        }
+
+        .nav-logo span {
+            font-family: 'Kanit', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #FFFFFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 4px 8px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar.scrolled .nav-links {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(234, 88, 12, 0.25));
+            color: var(--accent-light);
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 25%, #1E3A8A 0%, #0F172A 70%, #080D1A 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(2px 2px at 20% 30%, rgba(253, 230, 138, 0.8), transparent),
+                radial-gradient(2px 2px at 40% 70%, rgba(253, 230, 138, 0.6), transparent),
+                radial-gradient(2px 2px at 60% 20%, rgba(253, 230, 138, 0.7), transparent),
+                radial-gradient(2px 2px at 80% 50%, rgba(253, 230, 138, 0.5), transparent),
+                radial-gradient(3px 3px at 10% 80%, rgba(245, 158, 11, 0.6), transparent),
+                radial-gradient(3px 3px at 90% 15%, rgba(245, 158, 11, 0.5), transparent),
+                radial-gradient(2px 2px at 50% 45%, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 30% 90%, rgba(253, 230, 138, 0.6), transparent),
+                radial-gradient(2px 2px at 70% 35%, rgba(253, 230, 138, 0.5), transparent);
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .hero-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 36px;
+            padding-top: 15px;
+        }
+
+        .light-bulb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #FDE68A;
+            box-shadow: 0 0 16px #F59E0B, 0 0 32px rgba(245, 158, 11, 0.6);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .light-bulb:nth-child(even) { animation-delay: 1s; }
+        .light-bulb:nth-child(3n) { animation-delay: 0.5s; }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 8px #F59E0B, 0 0 16px rgba(245, 158, 11, 0.3); }
+            100% { box-shadow: 0 0 20px #FBBF24, 0 0 40px rgba(245, 158, 11, 0.7); }
+        }
+
+        .hero-wire {
+            position: absolute;
+            top: 22px;
+            left: 0;
+            right: 0;
+            height: 1.5px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 40px 24px 0;
+        }
+
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 45px rgba(245, 158, 11, 0.4), 0 15px 35px rgba(0,0,0,0.4);
+            margin-bottom: 24px;
+            animation: float 3.5s ease-in-out infinite;
+            background: #FFFFFF;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-family: 'Kanit', sans-serif;
+            font-size: clamp(2.6rem, 6.5vw, 4.8rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 8px;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            color: #94A3B8;
+            font-weight: 400;
+            margin-bottom: 16px;
+            letter-spacing: 4px;
+        }
+
+        .hero-subtitle {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: #E2E8F0;
+            font-weight: 400;
+            margin-bottom: 38px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-subtitle .icon { font-size: 1.15rem; }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.35);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(234, 88, 12, 0.5);
+            color: var(--white);
+        }
+
+        .hero-btn-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-cta-fb {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            transition: all 0.35s ease;
+        }
+
+        .hero-cta-fb:hover {
+            background: #1877F2;
+            border-color: #1877F2;
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4);
+        }
+
+        .hero-cta-fb svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .nav-social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(24, 119, 242, 0.2);
+            color: #60A5FA;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-left: 6px;
+        }
+
+        .nav-social-btn:hover {
+            background: #1877F2;
+            color: #FFFFFF;
+            transform: scale(1.1);
+            box-shadow: 0 0 12px rgba(24, 119, 242, 0.5);
+        }
+
+        .nav-social-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Float Facebook Button */
+        .float-fb {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #1877F2, #0A53BE);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.2);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulseFb 3s infinite;
+        }
+
+        .float-fb:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 14px 30px rgba(24, 119, 242, 0.6), 0 0 0 3px rgba(255, 255, 255, 0.3);
+            color: var(--white);
+        }
+
+        .float-fb svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulseFb {
+            0%, 100% { box-shadow: 0 8px 25px rgba(24, 119, 242, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.2); }
+            50% { box-shadow: 0 10px 30px rgba(24, 119, 242, 0.65), 0 0 0 5px rgba(24, 119, 242, 0.25); }
+        }
+
+        .fb-btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            background: #1877F2;
+            color: #FFFFFF !important;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.35);
+            transition: all 0.3s ease;
+            margin-top: 6px;
+        }
+
+        .fb-btn-link:hover {
+            background: #0D65D9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(24, 119, 242, 0.45);
+        }
+
+        .fb-btn-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll span {
+            display: block;
+            width: 24px;
+            height: 38px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 14px;
+            position: relative;
+        }
+
+        .hero-scroll span::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+        @keyframes scrollDot { 0% { opacity: 1; top: 6px; } 100% { opacity: 0; top: 22px; } }
+
+        /* ===== Section Common ===== */
+        .section {
+            padding: 100px 24px;
+        }
+
+        .section-container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 20px;
+            background: #FEF3C7;
+            color: #B45309;
+            border: 1px solid #FDE68A;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.1);
+        }
+
+        .section-header h2 {
+            font-family: 'Kanit', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 2.75rem);
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #F59E0B, #EA580C);
+            border-radius: 4px;
+            margin: 16px auto 0;
+        }
+
+        /* ===== About Section ===== */
+        .about {
+            background: #FFFFFF;
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 3px solid #FCD34D;
+            border-radius: var(--radius);
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .about-text h3 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-heading);
+            margin-bottom: 18px;
+            line-height: 1.3;
+        }
+
+        .about-text p {
+            color: var(--text-body);
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .about-feature:hover {
+            background: #FFFBEB;
+            border-color: #FDE68A;
+            transform: translateY(-2px);
+        }
+
+        .about-feature .icon {
+            font-size: 1.5rem;
+        }
+
+        .about-feature span {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        /* ===== Info Cards ===== */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            padding: 0 24px;
+            max-width: 1140px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 36px 28px;
+            border-radius: var(--radius);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            text-align: center;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3B82F6, #F59E0B);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+            border-color: #CBD5E1;
+        }
+
+        .info-card:hover::before {
+            opacity: 1;
+        }
+
+        .info-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: inline-block;
+            background: #FEF3C7;
+            width: 64px;
+            height: 64px;
+            line-height: 64px;
+            border-radius: 20px;
+        }
+
+        .info-card:nth-child(1) .icon { background: #EFF6FF; }
+        .info-card:nth-child(2) .icon { background: #FFF7ED; }
+        .info-card:nth-child(3) .icon { background: #FEF3C7; }
+
+        .info-card h4 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-heading);
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ===== Menu Section ===== */
+        .menu {
+            background: var(--cream);
+            position: relative;
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 45px;
+            flex-wrap: wrap;
+        }
+
+        .menu-cat-btn {
+            padding: 10px 26px;
+            border: 1.5px solid #CBD5E1;
+            background: #FFFFFF;
+            color: var(--text-body);
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .menu-cat-btn:hover {
+            border-color: #3B82F6;
+            color: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .menu-cat-btn.active {
+            background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
+            color: var(--white);
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid #F1F5F9;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: #E2E8F0;
+        }
+
+        .menu-card-img {
+            height: 230px;
+            overflow: hidden;
+            position: relative;
+            background: #F1F5F9;
+        }
+
+        .menu-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-card:hover .menu-card-img img {
+            transform: scale(1.08);
+        }
+
+        .menu-card-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #F59E0B, #EA580C);
+            color: var(--white);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .menu-card-body {
+            padding: 24px;
+        }
+
+        .menu-card-body h4 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-heading);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-card-body p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .menu-card-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px dashed #E2E8F0;
+        }
+
+        .menu-card-price .price {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #D97706;
+        }
+
+        .menu-card-price .unit {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .popular-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            background: #FEF3C7;
+            color: #B45309;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ===== Gallery Section ===== */
+        .gallery {
+            background: #0B1120;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gallery .section-header h2 {
+            color: var(--white);
+        }
+
+        .gallery .section-header p {
+            color: #94A3B8;
+        }
+
+        .gallery .section-badge {
+            background: rgba(245, 158, 11, 0.15);
+            color: #FCD34D;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 18px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            min-height: 220px;
+        }
+
+        .gallery-item:nth-child(1) img {
+            min-height: 458px;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 17, 32, 0.8) 0%, rgba(11, 17, 32, 0.1) 40%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after { opacity: 1; }
+        .gallery-item:hover img { transform: scale(1.07); }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 17, 32, 0.94);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius);
+            box-shadow: 0 0 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover { 
+            background: rgba(255,255,255,0.25);
+            transform: rotate(90deg);
+        }
+
+        /* ===== Promo Banner ===== */
+        .promo {
+            background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
+            padding: 75px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .promo::before {
+            content: '';
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
+            top: -140px;
+            right: -100px;
+        }
+
+        .promo::after {
+            content: '';
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(253, 230, 138, 0.15) 0%, transparent 70%);
+            bottom: -90px;
+            left: -70px;
+        }
+
+        .promo h2 {
+            font-family: 'Kanit', sans-serif;
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            color: var(--white);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .promo p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 32px;
+            font-size: 1.15rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 38px;
+            background: linear-gradient(135deg, #F59E0B, #EA580C);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.35s ease;
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-cta:hover { 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 15px 35px rgba(234, 88, 12, 0.55); 
+            color: var(--white);
+        }
+
+        /* ===== Location Map Section ===== */
+        .location-section {
+            background: #FFFFFF;
+            padding: 90px 24px;
+            position: relative;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 40px;
+            align-items: center;
+            background: #FAF7F2;
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid #E2E8F0;
+            box-shadow: var(--shadow);
+        }
+
+        .location-info h3 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+        }
+
+        .location-info p {
+            color: var(--text-body);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .location-detail-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .location-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .location-detail-item .loc-icon {
+            font-size: 1.3rem;
+            background: #FEF3C7;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2);
+        }
+
+        .location-detail-item .loc-text strong {
+            display: block;
+            color: var(--text-heading);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .location-detail-item .loc-text span {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .map-btn-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .map-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            color: #FFFFFF !important;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .map-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        .map-action-btn.secondary {
+            background: #FFFFFF;
+            color: #1E293B !important;
+            border: 1.5px solid #CBD5E1;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .map-action-btn.secondary:hover {
+            border-color: #3B82F6;
+            color: #2563EB !important;
+        }
+
+        .map-frame-wrapper {
+            position: relative;
+            border-radius: calc(var(--radius) - 4px);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 3px solid #FFFFFF;
+            min-height: 380px;
+            background: #E2E8F0;
+        }
+
+        .map-frame-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 380px;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 900px) {
+            .location-grid {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+            .map-frame-wrapper {
+                min-height: 300px;
+            }
+            .map-frame-wrapper iframe {
+                min-height: 300px;
+            }
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: #0A0F1D;
+            padding: 70px 24px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 45px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .footer-brand img {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+            background: #FFFFFF;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Kanit', sans-serif;
+            color: var(--white);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .footer-col p {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-col h4 {
+            font-family: 'Kanit', sans-serif;
+            color: var(--white);
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 32px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover { 
+            color: #FBBF24;
+            transform: translateX(4px);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact-item .icon {
+            font-size: 1.2rem;
+            margin-top: 1px;
+            color: #F59E0B;
+        }
+
+        .footer-contact-item span {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+            color: #64748B;
+            font-size: 0.88rem;
+        }
+
+        /* ===== Animations ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .about-image { order: -1; }
+            .about-image::after { display: none; }
+            .info-cards { grid-template-columns: 1fr; margin-top: -30px; }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .gallery-item:nth-child(1) img {
+                min-height: 250px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 260px;
+                height: 100vh;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 4px;
+                transition: right 0.35s ease;
+                box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a {
+                padding: 12px 18px;
+                font-size: 1.05rem;
+                border-radius: var(--radius-sm);
+            }
+            .hamburger { display: flex; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .hero-logo { width: 140px; height: 140px; }
+            .section { padding: 60px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="logo.png" alt="เปรม นมสด">
+                <span>เปรม นมสด</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">หน้าแรก</a></li>
+                <li><a href="#about">เกี่ยวกับเรา</a></li>
+                <li><a href="#menu">เมนู</a></li>
+                <li><a href="#gallery">แกลเลอรี</a></li>
+                <li><a href="#location">แผนที่ร้าน</a></li>
+                <li><a href="#contact">ติดต่อ</a></li>
+                <li>
+                    <a href="https://www.facebook.com/premnomsod" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="Facebook Page: เปรม นมสด">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="home">
+        <div class="hero-wire"></div>
+        <div class="hero-lights">
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+            <div class="light-bulb"></div>
+        </div>
+        <div class="hero-content">
+            <img src="logo.png" alt="เปรม นมสด Logo" class="hero-logo">
+            <h1><span class="accent">เปรม</span> นมสด</h1>
+            <p class="hero-tagline">PREM FRESH MILK</p>
+            <p class="hero-subtitle">
+                <span class="icon">🕐</span> เปิดทุกวัน 17:00 – 22:00 น. &nbsp;|&nbsp;
+                <span class="icon">✨</span> นมสด · โทสต์ · ของทานเล่น
+            </p>
+            <div class="hero-btn-group">
+                <a href="#menu" class="hero-cta">🥛 ดูเมนูของเรา</a>
+                <a href="https://www.facebook.com/premnomsod" target="_blank" rel="noopener noreferrer" class="hero-cta-fb">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <span>ติดตามบน Facebook</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll"><span></span></div>
+    </section>
+
+    <!-- ===== Info Cards ===== -->
+    <div class="info-cards">
+        <div class="info-card fade-in">
+            <span class="icon">🥛</span>
+            <h4>นมสดแท้ 100%</h4>
+            <p>นมสดคุณภาพดี หลากหลายรสชาติ ทั้งร้อนและเย็น เริ่มต้นเพียง 20 บาท</p>
+        </div>
+        <div class="info-card fade-in" style="transition-delay: 0.15s">
+            <span class="icon">🍞</span>
+            <h4>ขนมปังปิ้ง & ของทานเล่น</h4>
+            <p>โทสต์หลายหน้า ของทอดกรอบ เฟรนช์ฟราย และบิงซู เริ่มต้นเพียง 12 บาท</p>
+        </div>
+        <div class="info-card fade-in" style="transition-delay: 0.3s">
+            <span class="icon">🌙</span>
+            <h4>บรรยากาศชิลล์ๆ ยามค่ำ</h4>
+            <p>ร้านสไตล์สวนหลังบ้าน ไฟราว ดอกไม้เลื้อย นั่งชิลล์กับเพื่อนยามค่ำคืน</p>
+        </div>
+    </div>
+
+    <!-- ===== About ===== -->
+    <section class="section about" id="about">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <span class="section-badge">☕ ABOUT US</span>
+                <h2>เกี่ยวกับเปรม นมสด</h2>
+                <p>ร้านนมสดเล็กๆ ที่เต็มไปด้วยความอบอุ่น</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-image fade-in-left">
+                    <img src="บรรยากาศในร้าน/493940943_2527267730945907_8741123150059989016_n.jpg" alt="บรรยากาศหน้าร้านเปรม นมสด">
+                </div>
+                <div class="about-text fade-in-right">
+                    <h3>นมสดคุณภาพ บรรยากาศอบอุ่น 🌟</h3>
+                    <p>
+                        <strong>เปรม นมสด</strong> ร้านนมสดและของทานเล่นสไตล์ชิลล์ๆ ที่เปิดให้บริการในยามค่ำคืน บรรยากาศแบบ Outdoor ใต้แสงไฟราว ล้อมรอบด้วยดอกไม้และต้นไม้เลื้อย สร้างความรู้สึกอบอุ่นและผ่อนคลาย
+                    </p>
+                    <p>
+                        เรามุ่งมั่นเสิร์ฟนมสดแท้คุณภาพดีในราคาที่ทุกคนเข้าถึงได้ พร้อมขนมปังปิ้งและของทานเล่นรสชาติดี เป็นที่นิยมในหมู่นักศึกษาและกลุ่มเพื่อนที่ชอบมานั่งชิลล์พูดคุยกัน
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="icon">💰</span>
+                            <span>ราคาเริ่มต้น 12 บาท</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="icon">🌿</span>
+                            <span>ร้านสไตล์สวน</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="icon">👫</span>
+                            <span>นั่งเป็นกลุ่มได้</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="icon">🎨</span>
+                            <span>ตกแต่งน่ารัก</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Menu ===== -->
+    <section class="section menu" id="menu">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <span class="section-badge">📋 OUR MENU</span>
+                <h2>เมนูแนะนำ</h2>
+                <p>ของอร่อยราคาน่ารัก ที่คุณต้องลอง!</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="menu-categories fade-in">
+                <button class="menu-cat-btn active" data-filter="all">ทั้งหมด</button>
+                <button class="menu-cat-btn" data-filter="drink">เครื่องดื่ม</button>
+                <button class="menu-cat-btn" data-filter="toast">ขนมปังปิ้ง</button>
+                <button class="menu-cat-btn" data-filter="snack">ของทานเล่น</button>
+            </div>
+
+            <div class="menu-grid">
+                <!-- นมสด -->
+                <div class="menu-card fade-in" data-category="drink">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/493473120_2528534147485932_1438962868243656304_n.jpg" alt="นมสดหลากรส">
+                        <span class="menu-card-badge">ยอดนิยม</span>
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>🥛 นมสด (Fresh Milk)</h4>
+                        <p>นมสดแท้ 100% หลากหลายรสชาติ ทั้งร้อนและเย็น เสิร์ฟในแก้วน่ารักติดโลโก้ร้าน</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">20 / 25 / 30</span>
+                                <span class="unit"> บาท</span>
+                            </div>
+                            <span class="popular-tag">🔥 ขายดี</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- โซดาอิตาเลียน -->
+                <div class="menu-card fade-in" data-category="drink">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/492942909_2528367987502548_811911000064678643_n.jpg" alt="บิงซู/เครื่องดื่มพิเศษ">
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>🍹 โซดาอิตาเลียน</h4>
+                        <p>Italian Soda ซาบซ่าสดชื่น หลากรสชาติ ดื่มคู่กับขนมปังปิ้งอร่อยลงตัว</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">25</span>
+                                <span class="unit"> บาท</span>
+                            </div>
+                            <span class="popular-tag">✨ แนะนำ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ขนมปังช็อกโกแลต -->
+                <div class="menu-card fade-in" data-category="toast">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/44318093_775478239458207_3282462492936110080_n.jpg" alt="ขนมปังปิ้งช็อกโกแลต">
+                        <span class="menu-card-badge">ยอดนิยม</span>
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>🍫 โทสต์ช็อกโกแลต</h4>
+                        <p>ขนมปังปิ้งกรอบนอกนุ่มใน ราดซอสช็อกโกแลตเข้มข้น ทานคู่กับนมสดฟินสุดๆ</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">12</span>
+                                <span class="unit"> บาท~</span>
+                            </div>
+                            <span class="popular-tag">🔥 ขายดี</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ขนมปังเนยน้ำตาล -->
+                <div class="menu-card fade-in" data-category="toast">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/492412841_2527023350970345_4918805182070823305_n.jpg" alt="ขนมปังปิ้งเนย">
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>🧈 โทสต์เนยน้ำตาล</h4>
+                        <p>ขนมปังปิ้งเนยหอมๆ โรยน้ำตาลกรอบ หวานกำลังดี ทานเพลินจนหยุดไม่ได้</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">12</span>
+                                <span class="unit"> บาท~</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ขนมปังโอวัลติน -->
+                <div class="menu-card fade-in" data-category="toast">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/493540617_2527023530970327_8570458719034524791_n.jpg" alt="ขนมปังปิ้งโอวัลติน">
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>☕ โทสต์โอวัลติน</h4>
+                        <p>ขนมปังปิ้งราดโอวัลตินเข้มข้น โรยผงโกโก้ หอมหวานมัน สุดฟิน</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">12</span>
+                                <span class="unit"> บาท~</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ของทอด -->
+                <div class="menu-card fade-in" data-category="snack">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/44342331_775477832791581_5534039281854578688_n.jpg" alt="ของทอดกรอบ">
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>🍗 ของทอดกรอบ</h4>
+                        <p>ของทอดกรุบกรอบ เสิร์ฟร้อนๆ พร้อมซอสจิ้ม ทานเล่นเพลินๆ กับเพื่อน</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">ราคาตามเมนู</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- เฟรนช์ฟราย + บิงซู -->
+                <div class="menu-card fade-in" data-category="snack">
+                    <div class="menu-card-img">
+                        <img src="เมนูร้าน/492846847_2529634777375869_7035050521733813971_n.jpg" alt="บิงซูและขนมปังปิ้ง">
+                    </div>
+                    <div class="menu-card-body">
+                        <h4>🍧 บิงซู & เฟรนช์ฟราย</h4>
+                        <p>บิงซูนมสดท็อปปิ้งจัดเต็ม และเฟรนช์ฟรายกรอบทอง ทานคู่กันลงตัวสุดๆ</p>
+                        <div class="menu-card-price">
+                            <div>
+                                <span class="price">ราคาตามเมนู</span>
+                            </div>
+                            <span class="popular-tag">✨ แนะนำ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Gallery ===== -->
+    <section class="section gallery" id="gallery">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <span class="section-badge">📸 GALLERY</span>
+                <h2>บรรยากาศร้าน</h2>
+                <p>มาสัมผัสความอบอุ่นใต้แสงไฟราวกันเถอะ</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="gallery-grid fade-in">
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="บรรยากาศในร้าน/493940943_2527267730945907_8741123150059989016_n.jpg" alt="หน้าร้านเปรม นมสด">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="บรรยากาศในร้าน/461514505_2344750892530926_8616067714999523478_n.jpg" alt="บรรยากาศยามค่ำ">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="บรรยากาศในร้าน/492518988_2527277434278270_2006123765050258299_n.jpg" alt="ดอกไม้และแสงไฟ">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="บรรยากาศในร้าน/492549908_2527277360944944_1235157329857653281_n.jpg" alt="ลูกค้ามานั่งชิลล์">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="บรรยากาศในร้าน/494147542_2529628654043148_5498278050551664507_n.jpg" alt="แก้วนมสดเปรม">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Location / Map Section ===== -->
+    <section class="location-section" id="location">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <span class="section-badge">📍 LOCATION & MAP</span>
+                <h2>ปักหมุดที่ตั้งร้าน</h2>
+                <p>แวะมานั่งชิลล์กับเราได้ง่ายๆ ปักหมุดตามพิกัดนี้ได้เลย!</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="location-grid fade-in">
+                <div class="location-info">
+                    <h3>เปรม นมสด (Prem Fresh Milk)</h3>
+                    <p>ร้านนมสดและของทานเล่นบรรยากาศสวนหลังบ้านสุดอบอุ่น จ.บุรีรัมย์ เปิดเสิร์ฟความอร่อยยามค่ำคืนทุกวัน</p>
+                    
+                    <ul class="location-detail-list">
+                        <li class="location-detail-item">
+                            <div class="loc-icon">📍</div>
+                            <div class="loc-text">
+                                <strong>ที่ตั้งร้าน</strong>
+                                <span>เปรม นมสด, อำเภอเมืองบุรีรัมย์, จ.บุรีรัมย์ 31000</span>
+                            </div>
+                        </li>
+                        <li class="location-detail-item">
+                            <div class="loc-icon">🧭</div>
+                            <div class="loc-text">
+                                <strong>พิกัด GPS</strong>
+                                <span>14.99076, 103.09433</span>
+                            </div>
+                        </li>
+                        <li class="location-detail-item">
+                            <div class="loc-icon">⏰</div>
+                            <div class="loc-text">
+                                <strong>เวลาเปิด - ปิด</strong>
+                                <span>เปิดบริการทุกวัน 17:00 – 22:00 น.</span>
+                            </div>
+                        </li>
+                        <li class="location-detail-item">
+                            <div class="loc-icon">💬</div>
+                            <div class="loc-text">
+                                <strong>Facebook Page</strong>
+                                <span>fb.com/premnomsod</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="map-btn-group">
+                        <a href="https://www.google.com/maps/search/?api=1&query=14.99076,103.09433" target="_blank" rel="noopener noreferrer" class="map-action-btn">
+                            <span>🧭 เปิดนำทาง Google Maps</span>
+                        </a>
+                        <a href="https://www.bing.com/maps/search?v=2&pc=FACEBK&mid=8100&name=เปรม+นมสด%2C+Buriram%2C+Thailand%2C+31000&mkt=en-US&q=14.99076%2C+103.09433&cp=14.990760~103.094330&lvl=16&style=r" target="_blank" rel="noopener noreferrer" class="map-action-btn secondary">
+                            <span>🗺️ เปิด Bing Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="map-frame-wrapper">
+                    <iframe 
+                        title="แผนที่ร้านเปรม นมสด บุรีรัมย์"
+                        src="https://maps.google.com/maps?q=14.99076,103.09433&hl=th&z=16&output=embed"
+                        loading="lazy" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Promo Banner ===== -->
+    <section class="promo">
+        <h2>🥛 มาลิ้มลองนมสดแท้ ในบรรยากาศสุดชิลล์</h2>
+        <p>เริ่มต้นเพียง 20 บาท! แวะมาเปรม นมสด ได้ทุกวัน 17:00 – 22:00 น.</p>
+        <a href="#location" class="promo-cta">📍 ดูแผนที่ร้าน & การเดินทาง</a>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="เปรม นมสด">
+                    <h3>เปรม นมสด</h3>
+                </div>
+                <p>
+                    ร้านนมสดเล็กๆ ที่เต็มไปด้วยความอบอุ่น บรรยากาศสบายๆ สไตล์สวนหลังบ้าน ไฟราว ดอกไม้ ต้นไม้เลื้อย พร้อมเสิร์ฟนมสดคุณภาพและของทานเล่นอร่อยๆ ในราคาน่ารัก
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>ลิงก์ด่วน</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">🏠 หน้าแรก</a></li>
+                    <li><a href="#about">ℹ️ เกี่ยวกับเรา</a></li>
+                    <li><a href="#menu">📋 เมนู</a></li>
+                    <li><a href="#gallery">📸 แกลเลอรี</a></li>
+                    <li><a href="#location">📍 แผนที่ร้าน</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ติดต่อเรา</h4>
+                <div class="footer-contact-item">
+                    <span class="icon">🕐</span>
+                    <span>เปิดทุกวัน 17:00 – 22:00 น.</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon">📍</span>
+                    <span>เปรม นมสด, บุรีรัมย์ 31000<br>(พิกัด: 14.99076, 103.09433)</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon">💬</span>
+                    <div>
+                        <span style="display:block; margin-bottom: 4px;">Facebook Page:</span>
+                        <a href="https://www.facebook.com/premnomsod" target="_blank" rel="noopener noreferrer" class="fb-btn-link">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            <span>เปรม นมสด</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 เปรม นมสด — Prem Fresh Milk. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== Floating Facebook Contact Button ===== -->
+    <a href="https://www.facebook.com/premnomsod" target="_blank" rel="noopener noreferrer" class="float-fb" title="ทักแชท Facebook เปรม นมสด">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span>คุยกับเราใน Facebook</span>
+    </a>
+
+    <!-- ===== Lightbox ===== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <img src="" alt="Gallery Image" id="lightboxImg">
+    </div>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        // === Navbar scroll effect ===
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // === Hamburger menu ===
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // === Active nav link on scroll ===
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (link) {
+                    link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+                }
+            });
+        });
+
+        // === Scroll animations (Intersection Observer) ===
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // === Menu filter ===
+        const filterBtns = document.querySelectorAll('.menu-cat-btn');
+        const menuCards = document.querySelectorAll('.menu-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                menuCards.forEach(card => {
+                    const category = card.dataset.category;
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => { card.style.display = 'none'; }, 350);
+                    }
+                });
+            });
+        });
+
+        // === Lightbox ===
+        function openLightbox(el) {
+            const img = el.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
+</body>
+</html>
